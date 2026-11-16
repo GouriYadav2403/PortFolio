@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #F8EFE3;
+  --color-beige: #EAD8C4;
+  --color-coffee: #70452B;
+  --color-forest: #263B2D;
+  --color-sage: #A3A58A;
+  --color-ink: #231812;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}
+
+body {
+  background-color: #F8EFE3;
+  color: #231812;
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Custom Selection */
+::selection {
+  background-color: #263B2D;
+  color: #F8EFE3;
+}
+
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8EFE3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A3A58A;
+  border-radius: 9999px;
+  border: 2px solid #F8EFE3;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #70452B;
+}
+
+/* Glassmorphism Classes */
+.glass-dock {
+  background: rgba(248, 239, 227, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(112, 69, 43, 0.15);
+  box-shadow: 0 16px 36px -8px rgba(38, 59, 45, 0.18), 0 0 1px rgba(112, 69, 43, 0.25);
+}
+
+.glass-card {
+  background: rgba(253, 251, 247, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(234, 216, 196, 0.7);
+}
+
+/* Subtle background grain / organic gradient */
+.bg-ambient-warm {
+  background: radial-gradient(circle at 10% 20%, rgba(234, 216, 196, 0.45) 0%, transparent 40%),
+              radial-gradient(circle at 90% 75%, rgba(163, 165, 138, 0.25) 0%, transparent 45%),
+              #F8EFE3;
+}
+
+.bg-ambient-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(234, 216, 196, 0.4) 100%);
+}
+
+/* Floating animation utilities */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+}
+
+.animate-soft-float {
+  animation: softFloat 5s ease-in-out infinite;
+}

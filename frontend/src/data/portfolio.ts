@@ -1,0 +1,353 @@
+import { PortfolioData } from '@/types';
+
+export const portfolioData: PortfolioData = {
+  personal: {
+    name: "Gouri Yadav",
+    designation: "MERN Stack Developer",
+    headline: "Building Scalable Web Apps & Enterprise Content Management Systems",
+    summary:
+      "Computer Science Engineering student and full-stack developer with experience building responsive, scalable web applications and enterprise content-management systems using React, Next.js, TypeScript, Node.js, and Express.js. Skilled in integrating REST APIs, designing role-based access systems, and delivering production features in agile, cross-functional teams.",
+    location: "Indore, India",
+    email: "gouriy2414@gmail.com",
+    phone: "+91-7805001521",
+    availability: "Available for Full-time Roles & Internships",
+    resumeUrl: "/resume/Gouri_Yadav_Resume.pdf",
+    profileImage: "/images/gouri-anime-profile.png",
+  },
+  stats: [
+    {
+      label: "Production Systems",
+      value: "4+",
+      description: "CRM, HRMS & enterprise platforms built & optimized",
+    },
+    {
+      label: "Academic Standing",
+      value: "7.30",
+      description: "CGPA in B.Tech Computer Science Engineering",
+    },
+    {
+      label: "Enterprise Reach",
+      value: "3,000+",
+      description: "Customers supported via Tyler Content Manager workflows",
+    },
+  ],
+  socials: [
+    {
+      name: "LinkedIn",
+      url: "https://linkedin.com/in/gouriyadav",
+      iconName: "linkedin",
+      label: "Connect on LinkedIn",
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/gouriyadav",
+      iconName: "github",
+      label: "Explore GitHub",
+    },
+    {
+      name: "LeetCode",
+      url: "https://leetcode.com/u/gouriyadav",
+      iconName: "leetcode",
+      label: "Review LeetCode",
+    },
+    {
+      name: "Email",
+      url: "mailto:gouriy2414@gmail.com",
+      iconName: "mail",
+      label: "Send Direct Email",
+    },
+  ],
+  techStackBadges: [
+    "MongoDB",
+    "Express.js",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "Tailwind CSS",
+  ],
+  skillCategories: [
+    {
+      title: "Languages",
+      categoryKey: "languages",
+      description: "Foundational programming & strong-typed application development",
+      skills: [
+        { name: "C / C++", category: "languages" },
+        { name: "JavaScript", category: "languages", highlight: true },
+        { name: "TypeScript", category: "languages", highlight: true },
+      ],
+    },
+    {
+      title: "Frontend Engineering",
+      categoryKey: "frontend",
+      description: "Modern component-driven UI architecture, reactive state & styling",
+      skills: [
+        { name: "HTML5", category: "frontend" },
+        { name: "CSS3", category: "frontend" },
+        { name: "Next.js", category: "frontend", highlight: true },
+        { name: "Angular", category: "frontend" },
+        { name: "Tailwind CSS", category: "frontend", highlight: true },
+      ],
+    },
+    {
+      title: "Backend & Systems",
+      categoryKey: "backend",
+      description: "Server architecture, API design, security & real-time sockets",
+      skills: [
+        { name: "Node.js", category: "backend", highlight: true },
+        { name: "Express.js", category: "backend", highlight: true },
+        { name: "REST APIs", category: "backend", highlight: true },
+        { name: "Socket.io", category: "backend" },
+      ],
+    },
+    {
+      title: "Databases & Storage",
+      categoryKey: "databases",
+      description: "Document-oriented and relational database schema design & indexing",
+      skills: [
+        { name: "MongoDB", category: "databases", highlight: true },
+        { name: "MySQL", category: "databases" },
+      ],
+    },
+    {
+      title: "Tools & DevOps",
+      categoryKey: "tools",
+      description: "Version control, API testing, containerization & web servers",
+      skills: [
+        { name: "Git", category: "tools" },
+        { name: "GitHub", category: "tools", highlight: true },
+        { name: "Postman", category: "tools" },
+        { name: "Docker", category: "tools" },
+        { name: "Nginx", category: "tools" },
+        { name: "Visual Studio Code", category: "tools" },
+      ],
+    },
+  ],
+  projects: [
+    {
+      id: "media-octus-crm",
+      title: "Media Octus CRM",
+      subtitle: "Full-Stack OOH Advertising CRM Platform",
+      type: "Full-Stack Application",
+      thumbnail: "/images/projects/media-octus.jpg",
+      technologies: [
+        "Next.js 16",
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "MongoDB",
+        "Tailwind CSS",
+        "JWT",
+        "Zod",
+      ],
+      summary:
+        "Built a full-stack, role-based CRM platform (Admin, Manager, HR, User roles) for out-of-home advertising operations, with a Node.js/Express/TypeScript backend and a Next.js 16 (App Router) frontend styled with Tailwind CSS.",
+      highlights: [
+        "Designed and implemented a modular backend architecture (Model → Service → Controller → Routes → Validator) across multiple feature modules, adhering to clean coding standards.",
+        "Implemented JWT-based authentication with role-based access control (RBAC), secure password hashing (bcrypt), and protected API routes.",
+        "Developed the HR Attendance module featuring GPS-based check-in/check-out, shift-configuration logic, and automated late-arrival flagging using MongoDB unique-index constraints to prevent duplicate records.",
+        "Enforced server-side input validation with Zod and scoped database queries to isolate data access by user role, preventing cross-user data leakage.",
+        "Structured the frontend using a feature-based module pattern (API layer, custom hooks, reusable components) consuming typed REST API responses.",
+      ],
+      architecture: [
+        "Backend: Model → Service → Controller → Routes → Validator modular hierarchy",
+        "Security: JWT bearer tokens, bcrypt hashing, scoped database query filters",
+        "Validation: Zod schema parsing on request payloads before controller dispatch",
+        "Frontend: Next.js App Router, modular features, typed Axios interceptors",
+      ],
+      roleContribution:
+        "Full-Stack Developer: Owned end-to-end architecture from DB schema to UI implementation.",
+      githubUrl: "",
+      liveUrl: "",
+      featured: true,
+    },
+    {
+      id: "tyler-content-manager",
+      title: "Tyler Content Manager (TCM)",
+      subtitle: "Enterprise Content Management Platform",
+      type: "Enterprise Platform",
+      thumbnail: "/images/projects/tcm.jpg",
+      technologies: [
+        "Angular",
+        "Vaadin",
+        "Java",
+        "OData",
+        "OpenSearch",
+        "SQL Server",
+        "PDFTron",
+      ],
+      summary:
+        "Developed and enhanced Tyler Content Manager (TCM), an enterprise-grade content management solution integrated with seven Tyler products — including Municipal Justice/ERP Pro, School ERP Pro, Enterprise Assessment & Tax, and Enterprise Permitting & Licensing — supporting 3,000+ customers.",
+      highlights: [
+        "Engineered core functionalities for content capture, management, delivery, automation, and secure storage, improving cross-platform document workflows and performance.",
+        "Built robust frontend components in Angular, interfaced with a Spring Boot middleware, and optimized Java-based backend services for scalability and maintainability.",
+        "Exposed existing business logic through OData REST APIs, enabling seamless interoperability across Tyler's product ecosystem, and implemented OpenSearch for advanced search and indexing.",
+        "Owned front-end architecture decisions, led PR reviews, and collaborated in an agile environment on requirement gathering and client interaction.",
+      ],
+      architecture: [
+        "Frontend: Component-driven Angular UI with Vaadin document rendering",
+        "Middleware: Spring Boot microservices orchestrating enterprise logic",
+        "Search: OpenSearch cluster for instant document indexing and full-text retrieval",
+        "Integration: OData REST endpoints enabling cross-product enterprise connectivity",
+      ],
+      roleContribution:
+        "Frontend & Integration Developer: Led Angular feature development and Spring Boot/OData integration.",
+      githubUrl: "",
+      liveUrl: "",
+      featured: true,
+    },
+    {
+      id: "company-hrms-crm",
+      title: "Company HRMS / CRM Platform",
+      subtitle: "Real-Time Enterprise Operations Platform",
+      type: "Full-Stack Application",
+      thumbnail: "/images/projects/hrms.jpg",
+      technologies: [
+        "React",
+        "Node.js",
+        "Express",
+        "Socket.io",
+        "MongoDB",
+        "Nginx",
+      ],
+      summary:
+        "Fixed critical bugs and resolved production issues in the company's internal HRMS/CRM platform, improving stability and user experience while adding real-time communication modules.",
+      highlights: [
+        "Fixed critical bugs and resolved production issues in the company's internal HRMS/CRM platform, improving stability and user experience.",
+        "Implemented small feature enhancements and UI improvements based on client and QA feedback.",
+        "Collaborated with the development team to test, debug, and deploy fixes for real-time modules using Socket.io.",
+        "Worked in an Nginx reverse-proxied production environment with high concurrency.",
+      ],
+      architecture: [
+        "Real-Time: Socket.io websockets for live notification broadcasts & module syncing",
+        "Backend: Express server handling authenticated payroll, shift, and employee records",
+        "Deployment: Nginx reverse proxy load-balanced configuration",
+      ],
+      roleContribution:
+        "Full-Stack Developer: Stabilized production codebase, added real-time enhancements.",
+      githubUrl: "",
+      liveUrl: "",
+      featured: false,
+    },
+    {
+      id: "ai-code-debugging-assistant",
+      title: "AI Code Debugging Assistant",
+      subtitle: "Intelligent Developer Productivity Tool",
+      type: "Web Application",
+      thumbnail: "/images/projects/ai-debugger.jpg",
+      technologies: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "JavaScript",
+        "Tailwind CSS",
+        "REST APIs",
+      ],
+      summary:
+        "Designed and developed an AI-powered web application that analyzes code, detects errors, and generates real-time debugging suggestions to help users fix issues faster.",
+      highlights: [
+        "Designed and developed an AI-powered web application that analyzes code, detects errors, and generates real-time debugging suggestions to help users fix issues faster.",
+        "Built a responsive interface with React.js and Tailwind CSS using reusable components and structured error-boundary handling for a smooth user experience.",
+        "Integrated the frontend with backend services through REST APIs to support fast, reliable data communication between the AI engine and the UI.",
+      ],
+      architecture: [
+        "Frontend: React.js with Tailwind CSS, resilient error boundaries, and code highlighting",
+        "Backend: Express.js REST API bridging the client to AI evaluation services",
+        "Performance: Streamed responses and client-side AST inspection for instant feedback",
+      ],
+      roleContribution:
+        "Sole Developer: Conceived, designed, and developed the web application from scratch.",
+      githubUrl: "",
+      liveUrl: "",
+      featured: false,
+    },
+  ],
+  experience: [
+    {
+      id: "binjwa-it-solutions",
+      role: "MERN Stack Developer Intern",
+      company: "Binjwa IT Solutions",
+      duration: "June 2026 – Present",
+      period: "present",
+      location: "Indore, India",
+      points: [
+        "Developed and maintained full-stack web application features using MongoDB, Express.js, React.js, and Node.js.",
+        "Integrated REST APIs and collaborated on debugging, UI improvements, and application functionality.",
+        "Ensured responsive layouts and performant database queries in an agile engineering team.",
+      ],
+      skillsUsed: ["MongoDB", "Express.js", "React.js", "Node.js", "REST APIs"],
+    },
+    {
+      id: "xenpark-solutions",
+      role: "Frontend Developer Intern",
+      company: "XenParkSolutions",
+      duration: "August 2025 – December 2025",
+      period: "past",
+      location: "Indore, India",
+      points: [
+        "Developed responsive, user-friendly UI components for client and internal projects using Angular and modern frontend practices.",
+        "Integrated frontend components with backend services through REST APIs in collaboration with backend developers.",
+        "Applied Git and GitHub workflows for version control, code collaboration, and maintainable code history.",
+        "Tested, debugged, and optimized frontend code to improve usability, performance, and user experience.",
+      ],
+      skillsUsed: ["Angular", "TypeScript", "REST APIs", "Git", "GitHub"],
+    },
+  ],
+  education: [
+    {
+      id: "btech-cse",
+      degree: "B.Tech in Computer Science Engineering",
+      institution: "Sushila Devi Bansal College of Technology, Indore",
+      boardOrUniversity: "RGPV University",
+      duration: "2022 – 2026",
+      score: "7.30",
+      scoreType: "CGPA",
+      details: [
+        "Core coursework: Data Structures, Algorithms, Database Management Systems, Computer Networks, Operating Systems, Web Technologies.",
+        "Active member of campus technical society and debugging competitions.",
+      ],
+    },
+    {
+      id: "class-12",
+      degree: "Higher Secondary (Class XII)",
+      institution: "School of Excellence",
+      boardOrUniversity: "MP Board",
+      duration: "2019 – 2022",
+      score: "79.6%",
+      scoreType: "Percentage",
+      details: ["Mathematics and Science stream."],
+    },
+    {
+      id: "class-10",
+      degree: "High School (Class X)",
+      institution: "School of Excellence",
+      boardOrUniversity: "MP Board",
+      duration: "2019",
+      score: "89.66%",
+      scoreType: "Percentage",
+      details: ["Distinction in Mathematics and Science."],
+    },
+  ],
+  achievements: [
+    {
+      id: "debugging-comp",
+      title: "Technical Debugging Competition",
+      description:
+        "Participated in the competitive debugging contest organized at Sushila Devi Bansal College of Technology, demonstrating fast error tracing and code correction under timed conditions.",
+      category: "competition",
+    },
+    {
+      id: "heritage-quiz",
+      title: "Heritage Quiz & Sports Activities",
+      description:
+        "Active participant in the institutional Heritage Quiz alongside university sports activities, demonstrating versatility and collaborative team spirit.",
+      category: "quiz",
+    },
+    {
+      id: "hackerrank",
+      title: "HackerRank Practice & Certifications",
+      description:
+        "Completed structured problem-solving practice and certification assessments on HackerRank, strengthening algorithms and core programming fluency.",
+      category: "certification",
+    },
+  ],
+};
