@@ -34,19 +34,19 @@ export const portfolioData: PortfolioData = {
   socials: [
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/gouriyadav",
+      url: "https://www.linkedin.com/in/gouri-yadav-b05064269/",
       iconName: "linkedin",
       label: "Connect on LinkedIn",
     },
     {
       name: "GitHub",
-      url: "https://github.com/gouriyadav",
+      url: "https://github.com/GouriYadav2403",
       iconName: "github",
       label: "Explore GitHub",
     },
     {
       name: "LeetCode",
-      url: "https://leetcode.com/u/gouriyadav",
+      url: "https://leetcode.com/u/gouriyadav/",
       iconName: "leetcode",
       label: "Review LeetCode",
     },
