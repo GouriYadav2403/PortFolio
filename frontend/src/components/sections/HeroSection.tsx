@@ -118,19 +118,26 @@ export const HeroSection: React.FC = () => {
               <span className="text-xs uppercase tracking-wider text-coffee-light font-semibold mr-1">
                 Connect:
               </span>
-              {socials.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-cream hover:bg-beige text-coffee-dark hover:text-coffee-darker flex items-center justify-center border border-coffee/20 shadow-2xs transition-all hover:scale-105"
-                  aria-label={social.label}
-                  title={social.label}
-                >
-                  {getSocialIcon(social.iconName)}
-                </a>
-              ))}
+              {socials.map((social) => {
+                const isMail = social.iconName === 'mail' || social.url.startsWith('mailto:');
+                const href = isMail
+                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}`
+                  : social.url;
+
+                return (
+                  <a
+                    key={social.name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 rounded-full bg-cream hover:bg-beige text-coffee-dark hover:text-coffee-darker flex items-center justify-center border border-coffee/20 shadow-2xs transition-all hover:scale-105"
+                    aria-label={social.label}
+                    title={isMail ? `Send Email to ${personal.email} (Opens Gmail)` : social.label}
+                  >
+                    {getSocialIcon(social.iconName)}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </motion.div>

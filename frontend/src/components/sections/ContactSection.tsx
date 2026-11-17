@@ -17,6 +17,8 @@ import {
   Linkedin,
   Code,
   Sparkles,
+  Copy,
+  Check,
 } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
@@ -32,6 +34,15 @@ export const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(personal.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   const getSocialIcon = (iconName: string) => {
     switch (iconName) {
@@ -122,25 +133,50 @@ export const ContactSection: React.FC = () => {
               Contact Coordinates
             </h3>
 
-            {/* Email Card */}
-            <div className="flex items-start gap-4 p-4 rounded-xl bg-beige/40 border border-coffee/15">
-              <div className="p-3 rounded-lg bg-forest text-cream shrink-0">
-                <Mail className="w-5 h-5" />
+            {/* Email Card with Direct Gmail Compose & One-Click Copy */}
+            <div className="flex items-start justify-between gap-3 p-4 rounded-xl bg-beige/40 border border-coffee/15">
+              <div className="flex items-start gap-4 min-w-0">
+                <div className="p-3 rounded-lg bg-forest text-cream shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="space-y-0.5 min-w-0">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-coffee-light">
+                    Email Address
+                  </span>
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm sm:text-base font-bold text-coffee-dark hover:text-forest transition-colors break-all"
+                    title="Click to compose message in Gmail"
+                  >
+                    {personal.email}
+                  </a>
+                  <span className="text-[11px] text-sage-dark block">
+                    Click to open Gmail • Or copy directly
+                  </span>
+                </div>
               </div>
-              <div className="space-y-0.5">
-                <span className="text-xs uppercase tracking-wider font-semibold text-coffee-light">
-                  Email Address
-                </span>
-                <a
-                  href={`mailto:${personal.email}`}
-                  className="block text-sm sm:text-base font-bold text-coffee-dark hover:text-forest transition-colors break-all"
-                >
-                  {personal.email}
-                </a>
-                <span className="text-[11px] text-sage-dark block">
-                  Replies typically within 24 hours
-                </span>
-              </div>
+
+              {/* Copy Email Button */}
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="p-2 sm:px-3 sm:py-2 rounded-lg bg-cream hover:bg-beige border border-coffee/20 text-coffee-dark hover:text-forest transition-all shrink-0 cursor-pointer shadow-2xs text-xs flex items-center gap-1.5"
+                title="Copy email to clipboard"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-forest" />
+                    <span className="text-[11px] font-semibold text-forest">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5" />
+                    <span className="text-[11px] font-medium hidden sm:inline">Copy</span>
+                  </>
+                )}
+              </button>
             </div>
 
             {/* Phone Card */}
@@ -188,18 +224,26 @@ export const ContactSection: React.FC = () => {
                 Professional Networks
               </span>
               <div className="flex flex-wrap gap-2.5">
-                {socials.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cream hover:bg-beige text-coffee-dark border border-coffee/20 text-xs font-medium transition-all hover:scale-102 shadow-2xs"
-                  >
-                    {getSocialIcon(social.iconName)}
-                    <span>{social.name}</span>
-                  </a>
-                ))}
+                {socials.map((social) => {
+                  const isMail = social.iconName === 'mail' || social.url.startsWith('mailto:');
+                  const href = isMail
+                    ? `https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}`
+                    : social.url;
+
+                  return (
+                    <a
+                      key={social.name}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cream hover:bg-beige text-coffee-dark border border-coffee/20 text-xs font-medium transition-all hover:scale-102 shadow-2xs"
+                      title={isMail ? `Email: ${personal.email} (Opens Gmail)` : social.label}
+                    >
+                      {getSocialIcon(social.iconName)}
+                      <span>{social.name}</span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -236,9 +280,9 @@ export const ContactSection: React.FC = () => {
                 <CheckCircle className="w-5 h-5 shrink-0 mt-0.5 text-forest" />
                 <div>
                   <p className="font-semibold">{successMessage}</p>
-                  <p className="text-[11px] text-forest/80 mt-1 font-sans">
+                  {/* <p className="text-[11px] text-forest/80 mt-1 font-sans">
                     A copy has been recorded in the database and dispatched via secure mailer.
-                  </p>
+                  </p> */}
                 </div>
               </motion.div>
             )}

@@ -125,19 +125,26 @@ export const Footer: React.FC = () => {
               Connect
             </h4>
             <div className="flex flex-wrap gap-2.5">
-              {socials.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-forest-light/60 hover:bg-forest-light text-cream flex items-center justify-center border border-forest-light transition-all hover:scale-105"
-                  aria-label={social.label}
-                  title={social.label}
-                >
-                  {getSocialIcon(social.iconName)}
-                </a>
-              ))}
+              {socials.map((social) => {
+                const isMail = social.iconName === 'mail' || social.url.startsWith('mailto:');
+                const href = isMail
+                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}`
+                  : social.url;
+
+                return (
+                  <a
+                    key={social.name}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-forest-light/60 hover:bg-forest-light text-cream flex items-center justify-center border border-forest-light transition-all hover:scale-105"
+                    aria-label={social.label}
+                    title={isMail ? `Send Email to ${personal.email} (Opens Gmail)` : social.label}
+                  >
+                    {getSocialIcon(social.iconName)}
+                  </a>
+                );
+              })}
             </div>
 
             <div className="pt-2">
