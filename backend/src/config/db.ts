@@ -1,5 +1,13 @@
+import dns from 'node:dns';
 import mongoose from 'mongoose';
 import { ENV } from './env.js';
+
+// Fix for Windows / ISP DNS blocking querySrv (ECONNREFUSED) for MongoDB Atlas (SRV records)
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+} catch {
+  // fallback gracefully if environment does not permit setting DNS
+}
 
 export const connectDB = async (): Promise<boolean> => {
   if (!ENV.MONGODB_URI) {
