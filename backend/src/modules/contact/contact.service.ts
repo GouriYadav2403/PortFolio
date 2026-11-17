@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { ContactInput } from '../../types/index.js';
 import { ContactMessage } from './contact.model.js';
 import { createTransporter, generateEmailHtml } from '../../config/mailer.js';
@@ -47,18 +48,20 @@ export class ContactService {
       console.warn('⚠️  SMTP credentials not set. Email not sent. Please set SMTP_USER and SMTP_PASS in backend/.env.');
     }
 
-    // Persist in MongoDB if available
+    // Persist in MongoDB if database is actively connected
     try {
-      await ContactMessage.create({
-        name: input.name,
-        email: input.email,
-        subject: input.subject,
-        message: input.message,
-        ipAddress: clientMeta?.ipAddress || '',
-        userAgent: clientMeta?.userAgent || '',
-        isDelivered,
-        deliveryError,
-      });
+      if (mongoose.connection.readyState === 1) {
+        await ContactMessage.create({
+          name: input.name,
+          email: input.email,
+          subject: input.subject,
+          message: input.message,
+          ipAddress: clientMeta?.ipAddress || '',
+          userAgent: clientMeta?.userAgent || '',
+          isDelivered,
+          deliveryError,
+        });
+      }
     } catch (dbErr) {
       // In case MongoDB isn't connected, we don't throw an unhandled crash
       console.warn('ℹ️  MongoDB save skipped (DB not connected or unavailable).');

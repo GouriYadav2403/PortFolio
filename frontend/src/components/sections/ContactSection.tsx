@@ -409,6 +409,11 @@ export const ContactSection: React.FC = () => {
                     </>
                   )}
                 </button>
+                {isSubmitting && (
+                  <p className="text-[11px] text-coffee-light mt-2 font-sans animate-pulse">
+                    Connecting to live backend (Render free server wakes up in 20-30s on first request)...
+                  </p>
+                )}
               </div>
             </form>
           </motion.div>

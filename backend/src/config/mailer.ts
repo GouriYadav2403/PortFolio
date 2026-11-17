@@ -12,6 +12,9 @@ export const createTransporter = () => {
     host: ENV.SMTP_HOST,
     port: ENV.SMTP_PORT,
     secure: isSecure,
+    connectionTimeout: 4000,
+    greetingTimeout: 4000,
+    socketTimeout: 5000,
     auth: {
       user: ENV.SMTP_USER,
       pass: ENV.SMTP_PASS.replace(/\s+/g, ''),

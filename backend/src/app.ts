@@ -9,30 +9,10 @@ const app = express();
 // Trust proxy for rate limiting behind reverse proxies (like Render, Nginx)
 app.set('trust proxy', 1);
 
-// Enable CORS with configured frontend origins
+// Enable CORS for all portfolio visitors (mobile, desktop, preview domains)
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, postman)
-      if (!origin) return callback(null, true);
-
-      const allowedOrigins = [
-        ENV.FRONTEND_URL,
-        'http://localhost:3000',
-        'http://127.0.0.1:3000',
-      ];
-
-      // In development or if origin matches
-      if (
-        ENV.NODE_ENV !== 'production' ||
-        allowedOrigins.includes(origin) ||
-        origin.endsWith('.vercel.app')
-      ) {
-        return callback(null, true);
-      }
-
-      callback(new Error('Blocked by CORS policy'));
-    },
+    origin: true,
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
