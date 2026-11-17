@@ -14,7 +14,7 @@ export const createTransporter = () => {
     secure: isSecure,
     auth: {
       user: ENV.SMTP_USER,
-      pass: ENV.SMTP_PASS,
+      pass: ENV.SMTP_PASS.replace(/\s+/g, ''),
     },
     tls: {
       rejectUnauthorized: ENV.NODE_ENV === 'production',
