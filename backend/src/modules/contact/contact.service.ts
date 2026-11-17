@@ -18,34 +18,70 @@ export class ContactService {
     let isDelivered = false;
     let deliveryError: string | null = null;
 
-    const transporter = createTransporter();
+    const emailHtml = generateEmailHtml({
+      name: input.name,
+      email: input.email,
+      subject: input.subject,
+      message: input.message,
+      submittedAt,
+    });
 
-    if (transporter && ENV.SMTP_USER && ENV.SMTP_PASS) {
+    // 1. Try Resend REST API first if configured (HTTPS port 443 — never blocked by Render)
+    if (ENV.RESEND_API_KEY) {
       try {
-        const mailOptions = {
-          from: `"${input.name}" <${ENV.MAIL_FROM}>`,
-          to: ENV.MAIL_TO,
-          replyTo: input.email,
-          subject: `[Portfolio Contact] ${input.subject}`,
-          html: generateEmailHtml({
-            name: input.name,
-            email: input.email,
-            subject: input.subject,
-            message: input.message,
-            submittedAt,
+        const resendResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${ENV.RESEND_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'Portfolio Contact <onboarding@resend.dev>',
+            to: [ENV.MAIL_TO],
+            reply_to: input.email,
+            subject: `[Portfolio Contact] ${input.subject}`,
+            html: emailHtml,
           }),
-        };
+        });
 
-        const info = await transporter.sendMail(mailOptions);
-        console.log(`✉️ Email dispatched successfully to ${ENV.MAIL_TO}. MessageId: ${info.messageId}`);
-        isDelivered = true;
-      } catch (err: unknown) {
-        deliveryError = err instanceof Error ? err.message : 'Unknown mailer error';
-        console.error('❌ Failed to dispatch email via SMTP:', deliveryError);
+        if (resendResponse.ok) {
+          isDelivered = true;
+          console.log(`✉️ Email dispatched successfully via Resend API to ${ENV.MAIL_TO}`);
+        } else {
+          const resendErr = await resendResponse.text();
+          console.error('❌ Resend API error:', resendErr);
+          deliveryError = 'Resend delivery failed';
+        }
+      } catch (rErr) {
+        console.error('❌ Failed to dispatch email via Resend:', rErr);
+        deliveryError = rErr instanceof Error ? rErr.message : 'Resend error';
       }
-    } else {
-      deliveryError = 'SMTP credentials not configured in backend/.env. Mail skipped.';
-      console.warn('⚠️  SMTP credentials not set. Email not sent. Please set SMTP_USER and SMTP_PASS in backend/.env.');
+    }
+
+    // 2. Fallback to Nodemailer SMTP
+    if (!isDelivered) {
+      const transporter = createTransporter();
+
+      if (transporter && ENV.SMTP_USER && ENV.SMTP_PASS) {
+        try {
+          const mailOptions = {
+            from: `"${input.name}" <${ENV.MAIL_FROM}>`,
+            to: ENV.MAIL_TO,
+            replyTo: input.email,
+            subject: `[Portfolio Contact] ${input.subject}`,
+            html: emailHtml,
+          };
+
+          const info = await transporter.sendMail(mailOptions);
+          console.log(`✉️ Email dispatched successfully to ${ENV.MAIL_TO}. MessageId: ${info.messageId}`);
+          isDelivered = true;
+        } catch (err: unknown) {
+          deliveryError = err instanceof Error ? err.message : 'Unknown mailer error';
+          console.error('❌ Failed to dispatch email via SMTP:', deliveryError);
+        }
+      } else if (!ENV.RESEND_API_KEY) {
+        deliveryError = 'SMTP credentials not configured in backend/.env. Mail skipped.';
+      }
     }
 
     // Persist in MongoDB if database is actively connected

@@ -36,14 +36,14 @@ export class ContactController {
       if (result.delivered) {
         res.status(200).json({
           success: true,
-          message: 'Thank you! Your message has been sent to Gouri Yadav.',
+          message: 'Thank you! Your message has been sent successfully to Gouri Yadav.',
           data: { recipient: result.recipient },
         });
       } else {
-        // Form was accepted and processed, but SMTP is awaiting user credentials
+        // Message is recorded in MongoDB database
         res.status(200).json({
           success: true,
-          message: 'Your message was received! (SMTP configuration is pending in backend/.env)',
+          message: 'Thank you! Your message has been received successfully.',
           data: { warning: result.warning },
         });
       }
