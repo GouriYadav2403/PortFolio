@@ -1,3 +1,12 @@
+import dns from 'node:dns';
+
+// Ensure Google DNS is used to resolve MongoDB Atlas SRV records without ECONNREFUSED
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+} catch {
+  // Graceful fallback
+}
+
 import app from './app.js';
 import { ENV } from './config/env.js';
 import { connectDB } from './config/db.js';
